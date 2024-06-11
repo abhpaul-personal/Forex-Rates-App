@@ -1,0 +1,31 @@
+<%- include("header.ejs") %>
+<body>
+    <%- include("nav.ejs") %>
+    <div class="container mt-4">
+        <h2>From Specific Currency: </h2>
+        <form action="/fromSpecificCurrency" method="POST">
+          <input type="text" name="fromCurrCode" placeholder="Currency">
+          <input type="submit" value="Submit">
+        </form>
+        <% if (rates) { %>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Currency</th>
+                <th>Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let currency in rates) { %>
+                <tr>
+                  <td><%= currency %></td>
+                  <td><%= rates[currency] %></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        <% } else { %>
+          <p><%= error || "Waiting for data..." %></p>
+        <% } %>
+    </div>
+  </body>
